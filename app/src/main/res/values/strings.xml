@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">moviedb</string>
+    <string name="icon_genre">Icon genre</string>
+    <string name="list_genre_movie">List Genre Movie</string>
+    <string name="poster_path">Poster path</string>
+    <string name="movie">Movie</string>
+</resources>
