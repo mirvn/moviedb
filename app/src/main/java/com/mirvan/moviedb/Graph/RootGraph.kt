@@ -1,4 +1,4 @@
-package com.example.moviedb.Graph
+package com.mirvan.moviedb.Graph
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.* // ktlint-disable no-wildcard-imports
@@ -9,11 +9,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.moviedb.Core.util.Graph
 import com.mirvan.moviedb.App_feature.presentation.detailmovie.DetailMovieScreen
 import com.mirvan.moviedb.App_feature.presentation.genre.GenreScreen
 import com.mirvan.moviedb.App_feature.presentation.moviebygenre.MovieByGenreScreen
 import com.mirvan.moviedb.App_feature.presentation.trailer.MovieVideosScreen
+import com.mirvan.moviedb.Core.util.Graph
 import com.mirvan.moviedb.R
 
 @SuppressLint("CoroutineCreationDuringComposition")

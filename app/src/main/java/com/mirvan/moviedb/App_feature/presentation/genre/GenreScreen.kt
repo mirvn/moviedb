@@ -9,9 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.moviedb.Core.util.Graph
 import com.mirvan.moviedb.App_feature.presentation.item.ItemListGenre
 import com.mirvan.moviedb.App_feature.presentation.item.ShimmerGenres
+import com.mirvan.moviedb.Core.util.Graph
 
 @Composable
 fun GenreScreen(

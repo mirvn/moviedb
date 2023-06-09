@@ -1,4 +1,4 @@
-package com.example.moviedb.Core.util
+package com.mirvan.moviedb.Core.util
 
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable

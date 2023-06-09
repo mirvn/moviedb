@@ -1,8 +1,6 @@
 package com.mirvan.moviedb.App_feature.presentation.trailer
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.webkit.WebView
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -45,13 +43,6 @@ fun MovieVideosScreen(
     // A custom WebViewClient and WebChromeClient can be provided via subclassing
     val webClient = remember {
         object : AccompanistWebViewClient() {
-            override fun onPageStarted(
-                view: WebView,
-                url: String?,
-                favicon: Bitmap?
-            ) {
-                super.onPageStarted(view, url, favicon)
-            }
         }
     }
     WebView(

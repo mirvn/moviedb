@@ -11,12 +11,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.moviedb.Core.util.Graph
 import com.mirvan.moviedb.App_feature.presentation.item.ItemDetailMovie
 import com.mirvan.moviedb.App_feature.presentation.item.ItemReviews
 import com.mirvan.moviedb.App_feature.presentation.item.ShimmerDetailMovie
 import com.mirvan.moviedb.App_feature.presentation.item.ShimmerMovieReviews
 import com.mirvan.moviedb.BuildConfig
+import com.mirvan.moviedb.Core.util.Graph
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil.CoilImage
 

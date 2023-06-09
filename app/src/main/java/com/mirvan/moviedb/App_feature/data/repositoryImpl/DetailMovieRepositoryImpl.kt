@@ -1,9 +1,9 @@
 package com.mirvan.moviedb.App_feature.data.repositoryImpl // ktlint-disable package-name
 
-import com.example.moviedb.Core.util.Resource
 import com.mirvan.moviedb.App_feature.data.remote.MainApi
 import com.mirvan.moviedb.App_feature.domain.model.MovieDetail
 import com.mirvan.moviedb.App_feature.domain.repository.DetailMovieRepository
+import com.mirvan.moviedb.Core.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.json.JSONObject

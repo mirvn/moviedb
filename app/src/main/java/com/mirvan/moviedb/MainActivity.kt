@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.example.moviedb.Graph.RootNavigationGraph
+import com.mirvan.moviedb.Graph.RootNavigationGraph
 import com.mirvan.moviedb.ui.theme.MoviedbTheme
 import dagger.hilt.android.AndroidEntryPoint
 

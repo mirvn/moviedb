@@ -1,4 +1,4 @@
-package com.example.moviedb.Core.util
+package com.mirvan.moviedb.Core.util
 
 object Graph {
     const val GENRE = "genre_graph"

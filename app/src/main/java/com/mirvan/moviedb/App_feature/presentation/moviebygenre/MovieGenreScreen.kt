@@ -11,9 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.moviedb.Core.util.Graph
 import com.mirvan.moviedb.App_feature.presentation.item.ItemMovieByGenre
 import com.mirvan.moviedb.App_feature.presentation.item.ShimmerMovieByGenre
+import com.mirvan.moviedb.Core.util.Graph
 import kotlinx.coroutines.delay
 
 @Composable

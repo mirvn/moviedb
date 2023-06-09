@@ -1,9 +1,9 @@
 package com.mirvan.moviedb.App_feature.data.repositoryImpl
 
-import com.example.moviedb.Core.util.Resource
 import com.mirvan.moviedb.App_feature.data.remote.MainApi
 import com.mirvan.moviedb.App_feature.domain.model.Genres
 import com.mirvan.moviedb.App_feature.domain.repository.GetGenresRepository
+import com.mirvan.moviedb.Core.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.json.JSONObject
