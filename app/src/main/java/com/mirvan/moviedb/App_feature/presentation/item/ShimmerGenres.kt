@@ -2,9 +2,12 @@ package com.mirvan.moviedb.App_feature.presentation.item
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.* // ktlint-disable no-wildcard-imports
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.moviedb.Core.util.shimmerEffect
@@ -19,7 +22,7 @@ fun ShimmerGenres(
         Row(
             modifier = modifier
                 .background(
-                    color = MaterialTheme.colorScheme.onPrimary.copy(0.8f),
+                    color = Color.Transparent,
                     shape = MaterialTheme.shapes.small
                 )
                 .padding(8.dp)
@@ -27,7 +30,8 @@ fun ShimmerGenres(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(20.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .height(40.dp)
                     .shimmerEffect()
             )
         }

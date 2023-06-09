@@ -76,7 +76,6 @@ class MovieByGenresViewModel @Inject constructor(
                                 isLoading = false,
                                 message = "Genres successfully loaded"
                             )
-                            Log.e("TAG", "getMovieByGenres-_movieByGenre-Size-ViewModel: ${_movieByGenre.value.results.size}")
                         }
                         is Resource.Error -> {
                             _movieByGenresState.value = movieByGenresState.value.copy(

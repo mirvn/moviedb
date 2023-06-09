@@ -8,4 +8,5 @@
     <string name="content_detail_movie_description">Content description:</string>
     <string name="user_review_movie_detail">Users review:</string>
     <string name="detail_movie">Detail movie</string>
+    <string name="rating">"Rating: "</string>
 </resources>

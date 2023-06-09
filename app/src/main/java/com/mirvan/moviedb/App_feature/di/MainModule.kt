@@ -4,9 +4,11 @@ import com.mirvan.moviedb.App_feature.data.remote.MainApi
 import com.mirvan.moviedb.App_feature.data.repositoryImpl.DetailMovieRepositoryImpl
 import com.mirvan.moviedb.App_feature.data.repositoryImpl.GetGenresRepositoryImpl
 import com.mirvan.moviedb.App_feature.data.repositoryImpl.MovieByGenresRepositoryImpl
+import com.mirvan.moviedb.App_feature.data.repositoryImpl.MovieReviewsRepositoryImpl
 import com.mirvan.moviedb.App_feature.domain.repository.DetailMovieRepository
 import com.mirvan.moviedb.App_feature.domain.repository.GetGenresRepository
 import com.mirvan.moviedb.App_feature.domain.repository.MovieByGenresRepository
+import com.mirvan.moviedb.App_feature.domain.repository.MovieReviewsRepository
 import com.mirvan.moviedb.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -20,6 +22,16 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object MainModule {
+
+    @Provides
+    @Singleton
+    fun provideMovieReviewRepository(
+        mainApi: MainApi
+    ): MovieReviewsRepository {
+        return MovieReviewsRepositoryImpl(
+            api = mainApi
+        )
+    }
 
     @Provides
     @Singleton

@@ -3,43 +3,43 @@ package com.mirvan.moviedb.App_feature.data.repositoryImpl // ktlint-disable pac
 import android.util.Log
 import com.example.moviedb.Core.util.Resource
 import com.mirvan.moviedb.App_feature.data.remote.MainApi
-import com.mirvan.moviedb.App_feature.domain.model.MovieDetail
-import com.mirvan.moviedb.App_feature.domain.repository.DetailMovieRepository
+import com.mirvan.moviedb.App_feature.domain.model.MovieReview
+import com.mirvan.moviedb.App_feature.domain.repository.MovieReviewsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 
-class DetailMovieRepositoryImpl(
+class MovieReviewsRepositoryImpl(
     private val api: MainApi
-) : DetailMovieRepository {
-    override fun getDetailMovie(
+) : MovieReviewsRepository {
+    override fun getMovieReview(
         movieId: Int,
-        language: String
-    ): Flow<Resource<MovieDetail>> = flow {
+        page: String
+    ): Flow<Resource<MovieReview>> = flow {
         emit(Resource.Loading())
 
         // make Api Call
         try {
-            val remoteGenresData = api.getMovieDetail(
-                language = language,
-                movie_id = movieId
+            val remoteReviewsData = api.getMovieReviews(
+                movie_id = movieId,
+                page = page
             )
-            if (remoteGenresData.isSuccessful) {
-                val remoteToDto = remoteGenresData.body()
+            if (remoteReviewsData.isSuccessful) {
+                val remoteToDto = remoteReviewsData.body()
                 emit(
                     Resource.Success(
-                        data = remoteToDto?.toMovieDetail()
+                        data = remoteToDto?.toMovieReview()
                     )
                 )
             } else {
-                val contentType = remoteGenresData.headers().get("Content-Type")
-                val errorBody = remoteGenresData.errorBody()?.string()
+                val contentType = remoteReviewsData.headers().get("Content-Type")
+                val errorBody = remoteReviewsData.errorBody()?.string()
 
                 if (contentType?.contains("application/json") == true) {
                     val errorJson = JSONObject(errorBody.toString())
-                    val errorMessage = errorJson.getString("status_message")
+                    val errorMessage = errorJson.getString("message")
                     emit(Resource.Error(message = errorMessage, data = null))
                 }
             }

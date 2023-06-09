@@ -45,12 +45,7 @@ fun ItemDetailMovie(
             style = MaterialTheme.typography.titleSmall
         )
         Spacer(modifier = modifier.height(8.dp))
-        Row(
-//            modifier = modifier
-//                .fillMaxWidth()
-//                .wrapContentSize()
-//                .align(Alignment.Start)
-        ) {
+        Row {
             Text(
                 text = movieDetail.status.toString(),
                 modifier = modifier.wrapContentSize().padding(end = 8.dp),
@@ -92,8 +87,8 @@ fun ItemDetailMovie(
         Text(
             text = stringResource(id = com.mirvan.moviedb.R.string.user_review_movie_detail),
             modifier = modifier.wrapContentSize(),
-            style = MaterialTheme.typography.titleSmall
+            style = MaterialTheme.typography.titleMedium
         )
-        // user review item below:
+        Spacer(modifier = modifier.height(8.dp))
     }
 }

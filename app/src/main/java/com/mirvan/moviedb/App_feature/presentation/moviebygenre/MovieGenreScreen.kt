@@ -57,7 +57,6 @@ fun MovieByGenreScreen(
         LaunchedEffect(Unit) {
             // react on scroll
             pageState = (pageState.toInt() + 1).toString()
-            Log.e("TAG", "MovieByGenreScreen: $pageState")
             movieByGenresViewModel.getMovieByGenres(
                 language = "eng-US",
                 sort_by = "popularity.desc",
