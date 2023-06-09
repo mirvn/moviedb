@@ -1,4 +1,4 @@
-package com.example.douinventory.Core.util
+package com.example.moviedb.Core.util
 
 object Graph {
     const val GENRE = "genre_graph"

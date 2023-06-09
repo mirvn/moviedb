@@ -1,6 +1,5 @@
 package com.mirvan.moviedb.App_feature.presentation.genre
 
-import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.douinventory.Core.util.Graph
+import com.example.moviedb.Core.util.Graph
 import com.mirvan.moviedb.App_feature.presentation.item.ItemListGenre
 import com.mirvan.moviedb.App_feature.presentation.item.ShimmerGenres
 

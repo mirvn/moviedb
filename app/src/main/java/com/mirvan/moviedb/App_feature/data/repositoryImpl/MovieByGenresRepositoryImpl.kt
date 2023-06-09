@@ -1,7 +1,6 @@
 package com.mirvan.moviedb.App_feature.data.repositoryImpl // ktlint-disable package-name
 
-import android.util.Log
-import com.example.douinventory.Core.util.Resource
+import com.example.moviedb.Core.util.Resource
 import com.mirvan.moviedb.App_feature.data.remote.MainApi
 import com.mirvan.moviedb.App_feature.domain.model.MovieByGenre
 import com.mirvan.moviedb.App_feature.domain.repository.MovieByGenresRepository
@@ -44,7 +43,7 @@ class MovieByGenresRepositoryImpl(
                 val errorBody = remoteGenresData.errorBody()?.string()
 
                 if (contentType?.contains("application/json") == true) {
-                    val errorJson = JSONObject(errorBody)
+                    val errorJson = JSONObject(errorBody.toString())
                     val errorMessage = errorJson.getString("message")
                     emit(Resource.Error(message = errorMessage, data = null))
                 }

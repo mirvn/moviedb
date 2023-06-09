@@ -1,4 +1,4 @@
-package com.example.douinventory.Core.util
+package com.example.moviedb.Core.util
 
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable

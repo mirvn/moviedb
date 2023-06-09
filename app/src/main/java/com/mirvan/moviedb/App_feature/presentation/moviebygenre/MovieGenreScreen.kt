@@ -24,7 +24,6 @@ fun MovieByGenreScreen(
     movieByGenresViewModel: MovieByGenresViewModel = hiltViewModel(),
     navHostController: NavHostController
 ) {
-    val context = LocalContext.current
     val genreId = navHostController.currentBackStackEntry?.arguments?.getString("genreId")
     var pageState by remember {
         mutableStateOf("1")
@@ -86,8 +85,7 @@ fun MovieByGenreScreen(
                         if (movieByGenre != null) {
                             ItemMovieByGenre(
                                 movieData = movieByGenre,
-                                onCLickDetail = {},
-                                context = context
+                                onCLickDetail = {}
                             )
                         }
                     }

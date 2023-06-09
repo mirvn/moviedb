@@ -6,7 +6,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.douinventory.Core.util.Resource
+import com.example.moviedb.Core.util.Resource
 import com.mirvan.moviedb.App_feature.domain.model.MovieByGenre
 import com.mirvan.moviedb.App_feature.domain.repository.MovieByGenresRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

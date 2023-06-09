@@ -1,4 +1,4 @@
-package com.example.douinventory.Graph
+package com.example.moviedb.Graph
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.* // ktlint-disable no-wildcard-imports
@@ -9,7 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.douinventory.Core.util.Graph
+import com.example.moviedb.Core.util.Graph
 import com.mirvan.moviedb.App_feature.presentation.genre.GenreScreen
 import com.mirvan.moviedb.App_feature.presentation.moviebygenre.MovieByGenreScreen
 import com.mirvan.moviedb.R

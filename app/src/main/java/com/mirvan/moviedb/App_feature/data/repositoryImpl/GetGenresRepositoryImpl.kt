@@ -1,7 +1,6 @@
 package com.mirvan.moviedb.App_feature.data.repositoryImpl
 
-import android.util.Log
-import com.example.douinventory.Core.util.Resource
+import com.example.moviedb.Core.util.Resource
 import com.mirvan.moviedb.App_feature.data.remote.MainApi
 import com.mirvan.moviedb.App_feature.domain.model.Genres
 import com.mirvan.moviedb.App_feature.domain.repository.GetGenresRepository
@@ -32,8 +31,8 @@ class GetGenresRepositoryImpl(
                 val errorBody = remoteGenresData.errorBody()?.string()
 
                 if (contentType?.contains("application/json") == true) {
-                    val errorJson = JSONObject(errorBody)
-                    val errorMessage = errorJson.getString("message")
+                    val errorJson = JSONObject(errorBody.toString())
+                    val errorMessage = errorJson.getString("status_message")
                     emit(Resource.Error(message = errorMessage, data = null))
                 }
             }

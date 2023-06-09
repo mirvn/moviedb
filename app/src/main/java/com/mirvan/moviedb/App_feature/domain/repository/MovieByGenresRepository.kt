@@ -1,7 +1,6 @@
 package com.mirvan.moviedb.App_feature.domain.repository
 
-import com.example.douinventory.Core.util.Resource
-import com.mirvan.moviedb.App_feature.domain.model.Genres
+import com.example.moviedb.Core.util.Resource
 import com.mirvan.moviedb.App_feature.domain.model.MovieByGenre
 import kotlinx.coroutines.flow.Flow
 
