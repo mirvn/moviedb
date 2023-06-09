@@ -60,25 +60,25 @@ data class MovieDetail(
     )
 
     fun toMovieDetailState(): DetailMovieState {
-        val genresDetail: MutableList<MovieDetail.Genre> = mutableListOf()
+        val genresDetail: MutableList<Genre> = mutableListOf()
         genres?.map {
             genresDetail.add(
-                MovieDetail.Genre(
+                Genre(
                     id = it.id,
                     name = it.name
                 )
             )
         }
-        val belongsToCollectionDetail = MovieDetail.BelongsToCollection(
+        val belongsToCollectionDetail = BelongsToCollection(
             backdrop_path = belongs_to_collection?.backdrop_path,
             id = belongs_to_collection?.id,
             name = belongs_to_collection?.name,
             poster_path = belongs_to_collection?.poster_path
         )
-        val productionCompaniesDetail: MutableList<MovieDetail.ProductionCompany> = mutableListOf()
+        val productionCompaniesDetail: MutableList<ProductionCompany> = mutableListOf()
         production_companies?.map {
             productionCompaniesDetail.add(
-                MovieDetail.ProductionCompany(
+                ProductionCompany(
                     id = it.id,
                     name = it.name,
                     logo_path = it.logo_path,
@@ -86,19 +86,19 @@ data class MovieDetail(
                 )
             )
         }
-        val productionCountriesDetail: MutableList<MovieDetail.ProductionCountry> = mutableListOf()
+        val productionCountriesDetail: MutableList<ProductionCountry> = mutableListOf()
         production_countries?.map {
             productionCountriesDetail.add(
-                MovieDetail.ProductionCountry(
+                ProductionCountry(
                     iso_3166_1 = it.iso_3166_1,
                     name = it.name
                 )
             )
         }
-        val spokenLanguageDetail: MutableList<MovieDetail.SpokenLanguage> = mutableListOf()
+        val spokenLanguageDetail: MutableList<SpokenLanguage> = mutableListOf()
         spoken_languages?.map {
             spokenLanguageDetail.add(
-                MovieDetail.SpokenLanguage(
+                SpokenLanguage(
                     name = it.name,
                     english_name = it.english_name,
                     iso_639_1 = it.iso_639_1

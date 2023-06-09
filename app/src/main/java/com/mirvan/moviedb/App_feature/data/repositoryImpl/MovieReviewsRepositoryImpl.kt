@@ -1,6 +1,5 @@
 package com.mirvan.moviedb.App_feature.data.repositoryImpl // ktlint-disable package-name
 
-import android.util.Log
 import com.example.moviedb.Core.util.Resource
 import com.mirvan.moviedb.App_feature.data.remote.MainApi
 import com.mirvan.moviedb.App_feature.domain.model.MovieReview

@@ -1,6 +1,5 @@
 package com.mirvan.moviedb.App_feature.presentation.detailmovie // ktlint-disable package-name
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -34,8 +33,9 @@ class DetailMovieViewModel @Inject constructor(
     private val _movieReviewsState = mutableStateOf(MovieReviewState())
     val movieReviewsState: State<MovieReviewState> = _movieReviewsState
 
-    private var _reviewResultData: MutableList<MovieReview.Result> = mutableListOf()
     private lateinit var _reviewData: MutableState<MovieReview>
+    private var _reviewResultData: MutableList<MovieReview.Result> = mutableListOf()
+
     init {
         viewModelScope.launch {
             _detailMovieState.value = detailMovieState.value.copy(
@@ -66,41 +66,39 @@ class DetailMovieViewModel @Inject constructor(
                     .onEach { result ->
                         val resultData = result.data?.toMovieReviewState()
                         val resultMessage = result.message
-                        if (resultData?.movieReview != null) {
-                            _reviewResultData.addAll(result.data.results as List)
+                        if (result.data?.results != null) {
+                            _reviewResultData.addAll(result.data.results)
 
                             _reviewData = mutableStateOf(
                                 MovieReview(
-                                    id = resultData.movieReview.id,
-                                    page = resultData.movieReview.page,
+                                    id = resultData?.movieReview?.id,
+                                    page = resultData?.movieReview?.page,
                                     results = _reviewResultData,
-                                    total_pages = resultData.movieReview.total_pages,
-                                    total_results = resultData.movieReview.total_results
+                                    total_pages = resultData?.movieReview?.total_pages,
+                                    total_results = resultData?.movieReview?.total_results
                                 )
                             )
-                            Log.e("TAG", "getReviews-_reviewData: $_reviewData")
-                            Log.e("TAG", "getReviews-_reviewData.results?.size: ${_reviewData.value.results?.size}")
-                            when (result) {
-                                is Resource.Success -> {
-                                    _movieReviewsState.value = movieReviewsState.value.copy(
-                                        movieReview = _reviewData.value,
-                                        isLoading = false,
-                                        message = "Reviews successfully loaded"
-                                    )
-                                }
-                                is Resource.Error -> {
-                                    _movieReviewsState.value = movieReviewsState.value.copy(
-                                        movieReview = null,
-                                        isLoading = false,
-                                        message = resultMessage
-                                    )
-                                }
-                                is Resource.Loading -> {
-                                    _movieReviewsState.value = movieReviewsState.value.copy(
-                                        movieReview = null,
-                                        isLoading = true
-                                    )
-                                }
+                        }
+                        when (result) {
+                            is Resource.Success -> {
+                                _movieReviewsState.value = movieReviewsState.value.copy(
+                                    movieReview = _reviewData.value,
+                                    isLoading = false,
+                                    message = "Reviews successfully loaded"
+                                )
+                            }
+                            is Resource.Error -> {
+                                _movieReviewsState.value = movieReviewsState.value.copy(
+                                    movieReview = null,
+                                    isLoading = false,
+                                    message = resultMessage
+                                )
+                            }
+                            is Resource.Loading -> {
+                                _movieReviewsState.value = movieReviewsState.value.copy(
+                                    movieReview = null,
+                                    isLoading = true
+                                )
                             }
                         }
                     }.launchIn(this)

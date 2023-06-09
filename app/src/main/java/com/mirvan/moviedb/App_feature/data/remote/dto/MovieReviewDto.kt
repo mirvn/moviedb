@@ -28,12 +28,13 @@ data class MovieReviewDto(
 
     fun toMovieReview(): MovieReview {
         val resultData = mutableListOf<MovieReview.Result>()
-        results?.map { val authorDetailsData = MovieReview.Result.AuthorDetails(
-            avatar_path = it.author_details?.avatar_path,
-            name = it.author_details?.name,
-            rating = it.author_details?.rating,
-            username = it.author_details?.username
-        )
+        results?.map {
+            val authorDetailsData = MovieReview.Result.AuthorDetails(
+                avatar_path = it.author_details?.avatar_path,
+                name = it.author_details?.name,
+                rating = it.author_details?.rating,
+                username = it.author_details?.username
+            )
             resultData.add(
                 MovieReview.Result(
                     author = it.author,

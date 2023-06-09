@@ -1,18 +1,20 @@
 package com.mirvan.moviedb.App_feature.presentation.detailmovie
 
-import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.layout.* // ktlint-disable no-wildcard-imports
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.runtime.* // ktlint-disable no-wildcard-imports
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.mirvan.moviedb.App_feature.presentation.item.*
+import com.mirvan.moviedb.App_feature.presentation.item.ItemDetailMovie
+import com.mirvan.moviedb.App_feature.presentation.item.ItemReviews
+import com.mirvan.moviedb.App_feature.presentation.item.ShimmerDetailMovie
+import com.mirvan.moviedb.App_feature.presentation.item.ShimmerMovieReviews
 import com.mirvan.moviedb.BuildConfig
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil.CoilImage
@@ -64,15 +66,12 @@ fun DetailMovieScreen(
     if (endReached) {
         LaunchedEffect(Unit) {
             // react on scroll
-            Log.e(TAG, "DetailMovieScreen-totalPage: ${reviewMovieState.movieReview?.total_pages}")
-            if (pageState.toInt() != reviewMovieState.movieReview?.total_results) {
+            if (pageState.toInt() != reviewMovieState.movieReview?.total_pages) {
                 pageState = (pageState.toInt() + 1).toString()
                 detailMovieViewModel.getReviews(
                     movieId = detailMovieState.movieDetail?.id,
                     page = pageState
                 )
-                Log.e(TAG, "DetailMovieScreen-pageState: $pageState")
-                Log.e(TAG, "DetailMovieScreen-reviewMovieState: ${reviewMovieState.movieReview?.results?.size}")
             } else {
                 Toast.makeText(context, "No more reviews", Toast.LENGTH_SHORT).show()
             }
