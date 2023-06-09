@@ -9,10 +9,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.* // ktlint-disable no-wildcard-imports
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.moviedb.Core.util.Graph
 import com.mirvan.moviedb.App_feature.presentation.item.ItemMovieByGenre
 import com.mirvan.moviedb.App_feature.presentation.item.ShimmerMovieByGenre
 import kotlinx.coroutines.delay
@@ -22,9 +22,9 @@ fun MovieByGenreScreen(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
     movieByGenresViewModel: MovieByGenresViewModel = hiltViewModel(),
-    navHostController: NavHostController
+    navController: NavHostController
 ) {
-    val genreId = navHostController.currentBackStackEntry?.arguments?.getString("genreId")
+    val genreId = navController.currentBackStackEntry?.arguments?.getString("genreId")
     var pageState by remember {
         mutableStateOf("1")
     }
@@ -85,7 +85,9 @@ fun MovieByGenreScreen(
                         if (movieByGenre != null) {
                             ItemMovieByGenre(
                                 movieData = movieByGenre,
-                                onCLickDetail = {}
+                                onCLickDetail = {
+                                    navController.navigate(route = Graph.DETAILMOVIE + "/${movieByGenre.id}")
+                                }
                             )
                         }
                     }

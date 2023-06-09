@@ -4,4 +4,8 @@
     <string name="list_genre_movie">List Genre Movie</string>
     <string name="poster_path">Poster path</string>
     <string name="movie">Movie</string>
+    <string name="play_trailer">Play Trailer</string>
+    <string name="content_detail_movie_description">Content description:</string>
+    <string name="user_review_movie_detail">Users review:</string>
+    <string name="detail_movie">Detail movie</string>
 </resources>

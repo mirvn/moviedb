@@ -10,6 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.moviedb.Core.util.Graph
+import com.mirvan.moviedb.App_feature.presentation.detailmovie.DetailMovieScreen
 import com.mirvan.moviedb.App_feature.presentation.genre.GenreScreen
 import com.mirvan.moviedb.App_feature.presentation.moviebygenre.MovieByGenreScreen
 import com.mirvan.moviedb.R
@@ -45,10 +46,15 @@ fun RootNavigationGraph(
                 topBarTitle = "$genreName ${stringResource(id = R.string.movie)}"
                 MovieByGenreScreen(
                     paddingValues = paddingValue,
-                    navHostController = navController
+                    navController = navController
                 )
             }
-            composable(route = Graph.DETAILMOVIE) {
+            composable(route = Graph.DETAILMOVIE + "/{movieId}") {
+                topBarTitle = stringResource(id = R.string.detail_movie)
+                DetailMovieScreen(
+                    paddingValues = paddingValue,
+                    navController = navController
+                )
             }
             composable(route = Graph.TRAILER) {
             }

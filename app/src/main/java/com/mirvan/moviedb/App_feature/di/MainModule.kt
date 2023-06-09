@@ -1,8 +1,10 @@
 package com.mirvan.moviedb.App_feature.di
 
 import com.mirvan.moviedb.App_feature.data.remote.MainApi
+import com.mirvan.moviedb.App_feature.data.repositoryImpl.DetailMovieRepositoryImpl
 import com.mirvan.moviedb.App_feature.data.repositoryImpl.GetGenresRepositoryImpl
 import com.mirvan.moviedb.App_feature.data.repositoryImpl.MovieByGenresRepositoryImpl
+import com.mirvan.moviedb.App_feature.domain.repository.DetailMovieRepository
 import com.mirvan.moviedb.App_feature.domain.repository.GetGenresRepository
 import com.mirvan.moviedb.App_feature.domain.repository.MovieByGenresRepository
 import com.mirvan.moviedb.BuildConfig
@@ -18,6 +20,16 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object MainModule {
+
+    @Provides
+    @Singleton
+    fun provideDetailMovieRepository(
+        mainApi: MainApi
+    ): DetailMovieRepository {
+        return DetailMovieRepositoryImpl(
+            api = mainApi
+        )
+    }
 
     @Provides
     @Singleton
