@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.moviedb.Core.util.Graph
 import com.mirvan.moviedb.App_feature.presentation.item.ItemDetailMovie
 import com.mirvan.moviedb.App_feature.presentation.item.ItemReviews
 import com.mirvan.moviedb.App_feature.presentation.item.ShimmerDetailMovie
@@ -98,7 +99,9 @@ fun DetailMovieScreen(
                         )
                         ItemDetailMovie(
                             movieDetail = detailMovieState.movieDetail,
-                            onclickTrailer = {}
+                            onclickTrailer = {
+                                navController.navigate(route = Graph.TRAILER + "/${detailMovieState.movieDetail.id}")
+                            }
                         )
                     }
                 }

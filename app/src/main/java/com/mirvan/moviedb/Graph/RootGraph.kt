@@ -13,6 +13,7 @@ import com.example.moviedb.Core.util.Graph
 import com.mirvan.moviedb.App_feature.presentation.detailmovie.DetailMovieScreen
 import com.mirvan.moviedb.App_feature.presentation.genre.GenreScreen
 import com.mirvan.moviedb.App_feature.presentation.moviebygenre.MovieByGenreScreen
+import com.mirvan.moviedb.App_feature.presentation.trailer.MovieVideosScreen
 import com.mirvan.moviedb.R
 
 @SuppressLint("CoroutineCreationDuringComposition")
@@ -56,7 +57,12 @@ fun RootNavigationGraph(
                     navController = navController
                 )
             }
-            composable(route = Graph.TRAILER) {
+            composable(route = Graph.TRAILER + "/{movieId}") {
+                topBarTitle = stringResource(id = R.string.trailer)
+                MovieVideosScreen(
+                    paddingValues = paddingValue,
+                    navController = navController
+                )
             }
         }
     }

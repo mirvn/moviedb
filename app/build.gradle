@@ -23,6 +23,7 @@ android {
         buildConfigField("String", "URL_TMDB", URL_TMDB)
         buildConfigField("String", "API_KEY_TOKEN", API_KEY_TOKEN)
         buildConfigField("String", "URL_TMDB_IMAGE", URL_TMDB_IMAGE)
+        buildConfigField("String", "URL_YOUTUBE", URL_YOUTUBE)
     }
 
     buildTypes {
@@ -100,4 +101,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.0.0-rc01")
     // Image Component
     implementation "com.github.skydoves:landscapist-coil:2.2.0"
+    // WEB View
+    implementation "com.google.accompanist:accompanist-webview:0.31.3-beta"
+
 }
