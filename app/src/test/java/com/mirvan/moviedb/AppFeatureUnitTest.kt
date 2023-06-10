@@ -1,7 +1,7 @@
 package com.mirvan.moviedb
 
 import com.mirvan.moviedb.App_feature.data.remote.MainApi
-import com.mirvan.moviedb.App_feature.data.repositoryImpl.* // ktlint-disable no-wildcard-imports
+import com.mirvan.moviedb.App_feature.data.repositoryImpl.*
 import com.mirvan.moviedb.App_feature.domain.model.*
 import com.mirvan.moviedb.Core.util.Resource
 import com.mirvan.moviedb.utils.enqueueResponse
@@ -10,7 +10,7 @@ import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
-import org.junit.Assert.* // ktlint-disable no-wildcard-imports
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
