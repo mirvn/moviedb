@@ -1,9 +1,11 @@
 package com.mirvan.moviedb
 
-import com.example.moviedb.Core.util.Resource
 import com.mirvan.moviedb.App_feature.data.remote.MainApi
 import com.mirvan.moviedb.App_feature.data.repositoryImpl.GetGenresRepositoryImpl
+import com.mirvan.moviedb.App_feature.data.repositoryImpl.MovieByGenresRepositoryImpl
 import com.mirvan.moviedb.App_feature.domain.model.Genres
+import com.mirvan.moviedb.App_feature.domain.model.MovieByGenre
+import com.mirvan.moviedb.Core.util.Resource
 import com.mirvan.moviedb.utils.enqueueResponse
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.runBlocking
@@ -26,6 +28,7 @@ class AppFeatureUnitTest {
         .build()
         .create(MainApi::class.java)
     private val getGenresRepository = GetGenresRepositoryImpl(api)
+    private val movieByGenresRepository = MovieByGenresRepositoryImpl(api)
 
     @After
     fun tearDown() {
@@ -123,13 +126,13 @@ class AppFeatureUnitTest {
                         val actual: Genres = result.data!!
                         assertEquals(expected.genres?.size, actual.genres?.size)
                         for (i in 0 until expected.genres?.size!!) {
-                            val expectedEmployee = expected.genres!![i]
-                            val actualEmployee = actual.genres!![i]
+                            val expectedGenre = expected.genres!![i]
+                            val actualGenre = actual.genres!![i]
 
-                            assertEquals(expectedEmployee.id, actualEmployee.id)
+                            assertEquals(expectedGenre.id, actualGenre.id)
                             assertEquals(
-                                expectedEmployee.name,
-                                actualEmployee.name
+                                expectedGenre.name,
+                                actualGenre.name
                             )
                         }
                     }
@@ -140,8 +143,8 @@ class AppFeatureUnitTest {
     }
 
     @Test
-    fun `should fetch get all employees given 401 response`() {
-        mockWebServer.enqueueResponse("get-genres-response-401.json", 401)
+    fun `shouldn't fetch get all genres given 401 response`() {
+        mockWebServer.enqueueResponse("error-response-401.json", 401)
 
         runBlocking {
             getGenresRepository.getGenres("en").collectLatest { result ->
@@ -157,4 +160,462 @@ class AppFeatureUnitTest {
             }
         }
     }
+
+    @Test
+    fun `should fetch get movies by genres correctly given 200 response`() {
+        mockWebServer.enqueueResponse("get-movies-by-genre-response-200.json", 200)
+
+        runBlocking {
+            movieByGenresRepository.getMovieByGenres(
+                "en",
+                "popularity.desc",
+                "false",
+                "1",
+                "28"
+            ).collectLatest { result ->
+                val expected = MovieByGenre(
+                    page = 1,
+                    results = listOf(
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        ),
+                        MovieByGenre.Result(
+                            adult = false,
+                            backdrop_path = "/h8gHn0OzBoaefsYseUByqsmEDMY.jpg",
+                            genre_ids = listOf(
+                                28,
+                                53,
+                                80
+                            ),
+                            id = 603692,
+                            original_language = "en",
+                            original_title = "John Wick: Chapter 4",
+                            overview = "With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
+                            popularity = 3701.122,
+                            poster_path = "/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg",
+                            release_date = "2023-03-22",
+                            title = "John Wick: Chapter 4",
+                            video = false,
+                            vote_average = 7.9,
+                            vote_count = 2787
+                        )
+                    ),
+                    total_pages = 1829,
+                    total_results = 36569
+                )
+                when (result) {
+                    is Resource.Success -> {
+                        val actual: MovieByGenre = result.data!!
+                        assertEquals(expected.results.size, actual.results.size)
+                        assertEquals(expected, actual)
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `shouldn't fetch get movies by genre given 401 response`() {
+        mockWebServer.enqueueResponse("error-response-401.json", 401)
+
+        runBlocking {
+            movieByGenresRepository.getMovieByGenres(
+                "en",
+                "popularity.desc",
+                "false",
+                "1",
+                "28"
+            ).collectLatest { result ->
+                val expected = "Invalid API key: You must be granted a valid key."
+                when (result) {
+                    is Resource.Error -> {
+                        val actual: String? = result.message
+                        assertEquals(expected, actual)
+                    }
+                    else -> {
+                    }
+                }
+            }
+        }
+    }
+
+
 }
