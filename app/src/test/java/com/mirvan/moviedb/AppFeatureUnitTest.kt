@@ -2,10 +2,7 @@ package com.mirvan.moviedb
 
 import com.mirvan.moviedb.App_feature.data.remote.MainApi
 import com.mirvan.moviedb.App_feature.data.repositoryImpl.* // ktlint-disable no-wildcard-imports
-import com.mirvan.moviedb.App_feature.domain.model.Genres
-import com.mirvan.moviedb.App_feature.domain.model.MovieByGenre
-import com.mirvan.moviedb.App_feature.domain.model.MovieDetail
-import com.mirvan.moviedb.App_feature.domain.model.MovieReview
+import com.mirvan.moviedb.App_feature.domain.model.*
 import com.mirvan.moviedb.Core.util.Resource
 import com.mirvan.moviedb.utils.enqueueResponse
 import kotlinx.coroutines.flow.collectLatest
@@ -774,7 +771,7 @@ class AppFeatureUnitTest {
     }
 
     @Test
-    fun `shouldn't fetch detail movies by genre given 401 response`() {
+    fun `shouldn't fetch detail movies given 401 response`() {
         mockWebServer.enqueueResponse("error-response-401.json", 401)
 
         runBlocking {
@@ -911,13 +908,194 @@ class AppFeatureUnitTest {
     }
 
     @Test
-    fun `shouldn't fetch movie reviews by genre given 401 response`() {
+    fun `shouldn't fetch movie reviews given 401 response`() {
         mockWebServer.enqueueResponse("error-response-401.json", 401)
 
         runBlocking {
             reviewsRepository.getMovieReview(
                 713704,
                 "en"
+            ).collectLatest { result ->
+                val expected = "Invalid API key: You must be granted a valid key."
+                when (result) {
+                    is Resource.Error -> {
+                        val actual: String? = result.message
+                        assertEquals(expected, actual)
+                    }
+                    else -> {
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `should fetch movie trailer correctly given 200 response`() {
+        mockWebServer.enqueueResponse("get-movie-trailer-response-200.json", 200)
+
+        runBlocking {
+            movieVideosRepository.getMovieVideos(713704).collectLatest { result ->
+                val expected = MoviesVideos(
+                    id = 713704,
+                    results = listOf(
+                        MoviesVideos.Result(
+                            iso_639_1 = "en",
+                            iso_3166_1 = "US",
+                            name = "60 Second UK Home Entertainment Trailer",
+                            key = "OWAqy24KqRY",
+                            site = "YouTube",
+                            size = 1080,
+                            type = "Teaser",
+                            official = true,
+                            published_at = "2023-05-24T16:10:15.000Z",
+                            id = "6479e522cf4b8b01227546d2"
+                        ),
+                        MoviesVideos.Result(
+                            iso_639_1 = "en",
+                            iso_3166_1 = "US",
+                            name = "Extended Preview",
+                            key = "2wc5VpRc450",
+                            site = "YouTube",
+                            size = 1080,
+                            type = "Clip",
+                            official = true,
+                            published_at = "2023-05-09T10:48:50.000Z",
+                            id = "645a7b2d1b70ae0166be1f34"
+                        ),
+                        MoviesVideos.Result(
+                            iso_639_1 = "en",
+                            iso_3166_1 = "US",
+                            name = "Opening Title Sequence",
+                            key = "k1LGAmQqA2A",
+                            site = "YouTube",
+                            size = 1080,
+                            type = "Clip",
+                            official = true,
+                            published_at = "2023-04-29T08:30:21.000Z",
+                            id = "644cff1a51a64e2640dd64b5"
+                        ),
+                        MoviesVideos.Result(
+                            iso_639_1 = "en",
+                            iso_3166_1 = "US",
+                            name = "Good Girl",
+                            key = "C-iWk4c9LAo",
+                            site = "YouTube",
+                            size = 1080,
+                            type = "Clip",
+                            official = true,
+                            published_at = "2023-04-28T08:00:07.000Z",
+                            id = "644b9983596a9105a557c9a8"
+                        ),
+                        MoviesVideos.Result(
+                            iso_639_1 = "en",
+                            iso_3166_1 = "US",
+                            name = "STUDIOCANAL PRESENTS: THE PODCAST - Episode 12 - Evil Dead, with Evil Dead Rise director Lee Cronin",
+                            key = "eembXtBIerU",
+                            site = "YouTube",
+                            size = 1080,
+                            type = "Featurette",
+                            official = true,
+                            published_at = "2023-04-27T17:30:06.000Z",
+                            id = "645a37046aa8e00139bc0ba2"
+                        ),
+                        MoviesVideos.Result(
+                            iso_639_1 = "en",
+                            iso_3166_1 = "US",
+                            name = "Dead by Dawn",
+                            key = "rfYmxSC1HrE",
+                            site = "YouTube",
+                            size = 1080,
+                            type = "Clip",
+                            official = true,
+                            published_at = "2023-04-27T08:00:32.000Z",
+                            id = "644a40fea39d0b0cf52469b1"
+                        ),
+                        MoviesVideos.Result(
+                            iso_639_1 = "en",
+                            iso_3166_1 = "US",
+                            name = "Burning Alive",
+                            key = "tEyYxqHmsko",
+                            site = "YouTube",
+                            size = 1080,
+                            type = "Clip",
+                            official = true,
+                            published_at = "2023-04-26T08:47:34.000Z",
+                            id = "6448f0657f2d4a053b0b36da"
+                        ),
+                        MoviesVideos.Result(
+                            iso_639_1 = "en",
+                            iso_3166_1 = "US",
+                            name = "Beautiful Dream",
+                            key = "V1-l4pMhGJw",
+                            site = "YouTube",
+                            size = 1080,
+                            type = "Clip",
+                            official = true,
+                            published_at = "2023-04-25T17:04:00.000Z",
+                            id = "64482b23f04d0104e697ed7e"
+                        ),
+                        MoviesVideos.Result(
+                            iso_639_1 = "en",
+                            iso_3166_1 = "US",
+                            name = "EVIL DEAD RISE takes horror to a whole new bloody level",
+                            key = "0lmBDnliqKs",
+                            site = "YouTube",
+                            size = 1080,
+                            type = "Featurette",
+                            official = true,
+                            published_at = "2023-04-23T08:00:02.000Z",
+                            id = "64451f7d05822404e933495b"
+                        ),
+                        MoviesVideos.Result(
+                            iso_639_1 = "en",
+                            iso_3166_1 = "US",
+                            name = "Audiences Spot",
+                            key = "HuIyYNGM6Eg",
+                            site = "YouTube",
+                            size = 1080,
+                            type = "Teaser",
+                            official = true,
+                            published_at = "2023-04-21T08:24:29.000Z",
+                            id = "6442f30acee2f602fb3630c9"
+                        ),
+                        MoviesVideos.Result(
+                            iso_639_1 = "en",
+                            iso_3166_1 = "US",
+                            name = "Lift prank at Evil Dead Rise screening",
+                            key = "ajEm1_xD_kc",
+                            site = "YouTube",
+                            size = 1080,
+                            type = "Featurette",
+                            official = true,
+                            published_at = "2023-04-18T16:08:21.000Z",
+                            id = "643f329037b3a9049942b9d7"
+                        )
+                    )
+                )
+                when (result) {
+                    is Resource.Success -> {
+                        val actual: MoviesVideos = result.data!!
+                        assertEquals(expected.results.size, actual.results.size)
+                        for (i in 0 until expected.results.size) {
+                            val expectedTrailerResults = expected.results[i]
+                            val actualTrailerResults = actual.results[i]
+
+                            assertEquals(expectedTrailerResults, actualTrailerResults)
+                        }
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `shouldn't fetch movie trailer given 401 response`() {
+        mockWebServer.enqueueResponse("error-response-401.json", 401)
+
+        runBlocking {
+            movieVideosRepository.getMovieVideos(
+                713704
             ).collectLatest { result ->
                 val expected = "Invalid API key: You must be granted a valid key."
                 when (result) {
